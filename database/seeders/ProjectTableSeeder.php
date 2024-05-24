@@ -22,6 +22,7 @@ class ProjectTableSeeder extends Seeder
         $new_project->text = $faker->paragraphs(3, true);
         $new_project->save();
 
+
       }
     }
 }
