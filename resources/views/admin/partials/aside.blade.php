@@ -8,7 +8,7 @@
                 </a>
             </li>
             <li>
-                <a href="#">
+                <a href="{{route('admin.project.index')}}">
                     <i class="fa-solid fa-address-book"></i>
                     gestione project
                 </a>

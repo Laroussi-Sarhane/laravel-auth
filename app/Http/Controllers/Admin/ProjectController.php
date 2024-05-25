@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+use App\Models\Project;
+use App\functions\Helper as Help;
+
 class ProjectController extends Controller
 {
     /**
@@ -12,7 +15,9 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        //
+        $projects= Project::all();
+        return view('admin.projects.index', compact('projects'));
+
     }
 
     /**
@@ -28,7 +33,19 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $exist= Project::where('title', $request->title)->first();
+        if($exist){
+            return redirect()->route('admin.project.index')->with('error', 'categoria gia esistentte');
+        }else{
+            $new= new Project();
+            $new->title = $request->title;
+            $new->slug = Help::getSlug($new->title, Project::class);
+            $new->save();
+            return redirect()->route('admin.project.index')->with('success', 'categoria creata');
+
+
+
+        }
     }
 
     /**

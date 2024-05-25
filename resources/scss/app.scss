@@ -5,7 +5,7 @@ header{
 
 .main-wrapper{
     height: calc(100vh - 70px);
-    background-color: aqua;
+
 }
 aside{
     width: 180px;
@@ -25,6 +25,15 @@ aside{
             }
         }
     }
+}
+.crud-table{
+  td:first-child{
+    width: 400px;
+  }
+  input{
+    border:none;
+    outline:none ;
+  }
 }
 
 
