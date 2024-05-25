@@ -4,6 +4,12 @@ use App\Http\Controllers\Guest\PageController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\ProjectController;
+use App\Http\Controllers\Admin\TecnologyController;
+use App\Http\Controllers\Admin\TypeController;
+
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -23,6 +29,11 @@ Route::middleware(['auth', 'verified'])
                 ->group(function (){
                     // qui inserisco le rotte delle crud
                     Route::get('/', [DashboardController::class, 'index'])->name('home');
+
+                    Route::resource('project',ProjectController::class);
+                    Route::resource('tecnology',TecnologyController::class);
+                    Route::resource('type',TypeController::class);
+
                 });
 
 
