@@ -67,9 +67,19 @@ class ProjectController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Project $project)
     {
-        //
+       $val_data= $request->validate([
+        'title'=> 'required|min:2|max:50'
+       ],
+       [
+         'title.required'=>'devi inserire il titolo dell project',
+         'title.min'=>'devi avere almeno 2 caratteri',
+         'title.max'=>'devi avere al massimo 50 caratteri',
+
+
+
+       ]);
     }
 
     /**

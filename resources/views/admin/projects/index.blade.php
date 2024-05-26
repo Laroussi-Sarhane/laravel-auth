@@ -4,6 +4,20 @@
 
 <h2>projects </h2>
 
+@if ($errors->any())
+<div class="alert alert-danger" role="alert">
+    <ul>
+        @foreach ($errors->all() as $error )
+        <li>
+            {{$error}}
+        </li>
+
+        @endforeach
+    </ul>
+  </div>
+
+@endif
+
 @if (session('error'))
 <div class="alert alert-danger" role="alert">
     {{session('error')}}
@@ -39,13 +53,18 @@
       </tr>
     </thead>
     <tbody>
-        @foreach ($projects as $item )
+        @foreach ($projects as  $project )
         <tr>
           <td>
-            <input type="text" value="{{$item->title}}">
+            <form action=" {{route('admin.project.update', $project)}} " method="POST" id="form-edit-{{ $project->id}}">
+                @csrf
+                @method('PUT')
+                <input type="text" value="{{ $project->title}}">
+
+            </form>
           </td>
           <td>
-            <button class="btn btn-warning "><i class="fa-solid fa-pencil"></i></button>
+            <button class="btn btn-warning " onclick="submitForm({{$project->id}})"><i class="fa-solid fa-pencil"></i></button>
             <button class="btn btn-danger "><i class="fa-solid fa-trash"></i></button>
 
           </td>
@@ -55,4 +74,10 @@
 
     </tbody>
   </table>
+  <script>
+    function submitForm(id){
+        const form= document.getElementById('form-edit-${id}')
+        form.submit();
+    }
+  </script>
 @endsection
